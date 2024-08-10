@@ -16,6 +16,7 @@ export class MyElement extends LitElement {
   render() {
     return html`
       <div class="container">
+        <label>Add you existing .jsonl training data file as a starting point (optional):</label>
         <input type="file" @change=${this.onFileSelected} class="file-input" />
 
          <div class="input-group">
