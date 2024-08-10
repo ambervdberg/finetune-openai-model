@@ -1,0 +1,35 @@
+{
+  "name": "finetune-openai-model",
+  "version": "1.0.0",
+  "description": "Finetune an OpenAI model",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "lit": "^3.1.4"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ambervdberg/finetune-openai-model.git"
+  },
+  "keywords": [
+    "openai",
+    "finetune",
+    "jsonl"
+  ],
+  "author": "Amber van den Berg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ambervdberg/finetune-openai-model/issues"
+  },
+  "homepage": "https://github.com/ambervdberg/finetune-openai-model#readme"
+}
