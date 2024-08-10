@@ -30,6 +30,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */function Y(n){return Wt({...n,state:!0,attribute:!1})}var D=(n=>(n.system="system",n.user="user",n.assistant="assistant",n))(D||{});class dt{constructor(t){this.messages=[],this.addSystemMessage(t)}addMessage(t,e){this.messages.push({role:t,content:e})}addUserMessage(t){this.addMessage(D.user,t)}addAssistantMessage(t){this.addMessage(D.assistant,t)}addSystemMessage(t){this.addMessage(D.system,t)}}var Vt=Object.defineProperty,Jt=Object.getOwnPropertyDescriptor,F=(n,t,e,s)=>{for(var i=s>1?void 0:s?Jt(t,e):t,r=n.length-1,o;r>=0;r--)(o=n[r])&&(i=(s?o(t,e,i):o(i))||i);return s&&i&&Vt(t,e,i),i};let E=class extends C{constructor(){super(...arguments),this.userMessage="",this.assistantMessage="",this.systemMessage="",this.fileData=[]}render(){return W`
       <div class="container">
+        <label>Add you existing .jsonl training data file as a starting point (optional):</label>
         <input type="file" @change=${this.onFileSelected} class="file-input" />
 
          <div class="input-group">
