@@ -13,45 +13,50 @@ export class MyElement extends LitElement {
 
   private fileData: ChatData[] = [];
 
+  private readonly defaultSystemMessage = 'You are a helpful assistant!';
+
   render() {
     return html`
-      <div class="container">
-        <label>Add you existing .jsonl training data file as a starting point (optional):</label>
-        <input type="file" @change=${this.onFileSelected} class="file-input" />
+    <div class="wrapper">
+      <div class="half top-half">
+        <div class="container">
+          <label>Add your existing .jsonl training data file as a starting point (optional):</label>
+          <input type="file" @change=${this.onFileSelected} class="file-input" />
 
-         <div class="input-group">
-          <label>System Message:</label>
-          <input
-            type="text"
-            .value=${this.systemMessage}
-            @input=${(e: Event) => this.systemMessage = (e.target as HTMLInputElement).value}
-          />
-        </div>
+          <div class="input-group">
+            <label>System Message:</label>
+            <input
+              type="text"
+              .placeholder=${this.defaultSystemMessage}
+              .value=${this.systemMessage}
+              @input=${(e: Event) => this.systemMessage = (e.target as HTMLInputElement).value}
+            />
+          </div>
 
-        <div class="input-group">
-          <label>User Message:</label>
-          <input
-            type="text"
-            .value=${this.userMessage}
-            @input=${(e: Event) => this.userMessage = (e.target as HTMLInputElement).value}
-          />
+          <div class="input-group">
+            <label>User Message:</label>
+            <input
+              type="text"
+              .value=${this.userMessage}
+              @input=${(e: Event) => this.userMessage = (e.target as HTMLInputElement).value}
+            />
+          </div>
+          <div class="input-group">
+            <label>Assistant Message:</label>
+            <input
+              type="text"
+              .value=${this.assistantMessage}
+              @input=${(e: Event) => this.assistantMessage = (e.target as HTMLInputElement).value}
+            />
+          </div>
+          <div class="button-group">
+            <button @click=${this.onAddMessage}>Add messages to current chat</button>
+            <button ?disabled=${!Boolean(this.chatData)} @click=${this.onNextChat}>Complete & Start next chat</button>
+          </div>        
         </div>
-        <div class="input-group">
-          <label>Assistant Message:</label>
-          <input
-            type="text"
-            .value=${this.assistantMessage}
-            @input=${(e: Event) => this.assistantMessage = (e.target as HTMLInputElement).value}
-          />
-        </div>
-        <div class="button-group">
-          <button @click=${this.onAddMessage}>Add messages to current chat</button>
-          <button ?disabled=${!Boolean(this.chatData)} @click=${this.onNextChat}>Complete & Start next chat</button>
-        </div>        
-        
       </div>
       
-      <div class="messages-container">
+      <div class="half bottom-half">
         <button id="save-button" @click=${this.onSaveToFile} class="save-button">Save to file</button>
         <h3>All chats:</h3>
           
@@ -69,6 +74,7 @@ export class MyElement extends LitElement {
           </ul>
         </code>
       </div>
+    </div>
     `;
   }
 
@@ -87,7 +93,7 @@ export class MyElement extends LitElement {
     if (!this.chatData) {
 
       if (!this.systemMessage) {
-        this.systemMessage = 'You are a helpful assistant!';
+        this.systemMessage = this.defaultSystemMessage;
       }
 
       this.chatData = new ChatData(this.systemMessage);
@@ -170,6 +176,18 @@ export class MyElement extends LitElement {
       height: 100%;
     }
 
+    .wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-half {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .container {
       display: flex;
       flex-direction: column;
@@ -179,7 +197,13 @@ export class MyElement extends LitElement {
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       padding: 16px;   
-      margin: 16px auto;
+      margin: auto;
+    }
+
+    .half {
+      height: 50%;
+      width: 100%;
+      overflow-y: auto;
     }
 
     .input-group {
@@ -231,7 +255,7 @@ export class MyElement extends LitElement {
       align-self: flex-start;
     }
 
-    .messages-container {
+    .bottom-half {
       background-color: #1F1F1F;
       padding: 16px;
       height: 50%;
@@ -241,7 +265,7 @@ export class MyElement extends LitElement {
       overflow-y: auto;
       box-sizing: border-box;
       box-shadow: -1px 1px 20px 0px #747474;
-
+      
       h3 {
         color: white;
       }
@@ -288,7 +312,7 @@ export class MyElement extends LitElement {
       cursor: pointer;
       float: right;
     }
-`;
+  `;
 }
 
 
