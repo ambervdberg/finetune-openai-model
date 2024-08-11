@@ -46,7 +46,7 @@ export class MyElement extends LitElement {
         </div>
         <div class="button-group">
           <button @click=${this.onAddMessage}>Add messages to current chat</button>
-          <button @click=${this.onNextChat}>Complete & Start next chat</button>
+          <button ?disabled=${!Boolean(this.chatData)} @click=${this.onNextChat}>Complete & Start next chat</button>
         </div>        
         
       </div>
@@ -220,6 +220,11 @@ export class MyElement extends LitElement {
 
     button:hover {
       background-color: #0056b3;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
 
     .save-button {
